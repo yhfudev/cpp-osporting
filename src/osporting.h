@@ -7,8 +7,6 @@
 #ifndef _OS_PORTING_H
 #define _OS_PORTING_H 1
 
-#define DEBUG 1
-
 ////////////////////////////////////////////////////////////////////////////////
 #include "ugosbase.h"
 #include "ugosarduino.h"
@@ -29,11 +27,11 @@
 
 #define MIN(a,b) (((a)>(b))?(b):(a))
 
-
+#if defined(ARDUINO)
 #define constrain(x,a,b) (((x)<(a))?(a):((x)>(b)?(b):(x)))
 #define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
 #define dtostrf(val, width, prec, buf) sprintf (buf, "%" # width "." # prec "f", (val))
-
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 // AVR related

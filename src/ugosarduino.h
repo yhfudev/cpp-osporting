@@ -13,7 +13,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // Arduino related
-#if ! defined(ARDUINO)
+#if defined(ARDUINO)
+#define SDL_Delay(a) delay(a)
+
+#else // ! ARDUINO
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,7 +37,6 @@ void analogWrite (uint8_t pin, int val);
 unsigned long millis(void);
 
 #define delay(a) usleep((a) * 1000)
-#define SDL_Delay(a) usleep(a)
 
 #ifdef __cplusplus
 }

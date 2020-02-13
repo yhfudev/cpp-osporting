@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h> // abs()
 #include <ctype.h>
-#include <unistd.h>
+#include <unistd.h> // usleep()
 #include <string.h>
 #include <limits.h>
 #include <sys/types.h> /* ssize_t pid_t off64_t */
