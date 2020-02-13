@@ -1,0 +1,17 @@
+{
+	"name": "libosporting",
+	"keywords": "porting, debug, arduino",
+	"description": "An porting library for C.",
+	"homepage": "https://github.com/yhfudev/cpp-osporting",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yhfudev/cpp-osporting.git"
+	},
+	"version": "0.1.0",
+	"authors": {
+		"name": "Yunhui Fu",
+		"url": "https://github.com/yhfudev"
+	},
+	"frameworks": "arduino",
+	"platforms": "*"
+}
