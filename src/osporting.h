@@ -52,6 +52,8 @@
   #include <stdint.h>
   #include <string.h>
   #include <assert.h>
+  #define pgm_read_dword_near(addr) *((const uint32_t *)(addr))
+  #define pgm_read_dword pgm_read_word_near
   #define pgm_read_word_near(addr) *((const uint16_t *)(addr))
   #define pgm_read_word pgm_read_word_near
   #define pgm_read_byte_near(addr) *((const uint8_t *)(addr))
@@ -66,7 +68,6 @@
 #endif // PSTR
 #ifndef PROGMEM
   #define PROGMEM
-  #define PSTR(a) (a)
 #endif // PROGMEM
 
 #ifndef __ATTR_PROGMEM__
