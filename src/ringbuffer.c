@@ -48,6 +48,7 @@ rbuf_init(void *prb, size_t byte_size)
 {
     ring_buffer_t *p = (ring_buffer_t *)prb;
     if ((byte_size) <= sizeof(ring_buffer_t)) {
+        TE("no enough spare memory for both the ring buffer structure and data!");
         return -1;
     }
     memset((prb), 0, sizeof(ring_buffer_t));
@@ -168,6 +169,7 @@ rbuf_peek_cb(void *prb, size_t offset, size_t sz, void * userdata, rbuf_callback
     //memmove (buf, (p)->buf1 + ((virt_pos_read + 1) % ((p)->sz_buf)), sz_rd);
     ret = cb_write(userdata, sz, 0, (p)->buf1 + ((virt_pos_read + 1) % ((p)->sz_buf)), sz_rd);
     if (ret < 0) {
+        TE("user callback return error!");
         return -1;
     }
     if (ret != sz_rd) {
@@ -183,6 +185,7 @@ rbuf_peek_cb(void *prb, size_t offset, size_t sz, void * userdata, rbuf_callback
         //memmove (buf + sz_cur, (p)->buf1 + ((virt_pos_read + sz_cur + 1) % ((p)->sz_buf)), sz_rd);
         ret = cb_write(userdata, sz, sz_cur, (p)->buf1 + ((virt_pos_read + sz_cur + 1) % ((p)->sz_buf)), sz_rd);
         if (ret < 0) {
+            TE("user callback return error!");
             return -1;
         }
         if (ret != sz_rd) {
@@ -194,8 +197,8 @@ rbuf_peek_cb(void *prb, size_t offset, size_t sz, void * userdata, rbuf_callback
 
 struct _rbuf_peek_cb_t {
     uint8_t * target;
-    size_t sz_buf;
-    size_t sz_ret;
+    size_t sz_buf; // the total size of the 'target' buffer
+    size_t sz_ret; // the data size
     size_t sz_more; // the size of buffer need to extended
 };
 
@@ -217,6 +220,7 @@ cb_write_peek (void * userdata, size_t sz_max, size_t off_target, uint8_t * buf,
 
     if (off_target + sz_buf > rec->sz_buf) {
         rec->sz_more = off_target + sz_buf - rec->sz_buf;
+        TW("need more buffer from 'target'");
         return 0;
     }
 
@@ -499,6 +503,14 @@ TEST_CASE( .name="ring-buffer", .description="test ring buffer.", .skip=0 ) {
         } \
     }
 
+    SECTION("test ring buffer, init") {
+        REQUIRE(-1 == rbuf_init(prb, 0));
+        REQUIRE(-1 == rbuf_init(prb, 1));
+        REQUIRE(-1 == rbuf_init(prb, sizeof(ring_buffer_t)-1));
+        REQUIRE(-1 == rbuf_init(prb, sizeof(ring_buffer_t)));
+        REQUIRE(0 == rbuf_init(prb, sizeof(ring_buffer_t)+1));
+    }
+
     SECTION("test ring buffer, parameters") {
         memset(boundary, MASK_BOUNDARY, sizeof(boundary));
         rbuf_init(prb, TEST_RBUF_SIZE);
@@ -511,6 +523,25 @@ TEST_CASE( .name="ring-buffer", .description="test ring buffer.", .skip=0 ) {
         rbuf_reset(prb);
         CHECK_BOUNDARY(boundary, prb);
         CHECK_BOUNDARY((boundary + sizeof(boundary) - sizeof(ring_buffer_t)), ((char *)boundary + sizeof(boundary)));
+    }
+
+    SECTION("test ring buffer, basic forward") {
+        int ret;
+        cur_val = 0;
+        cur_rd = 0;
+        memset(boundary, MASK_BOUNDARY, sizeof(boundary));
+        rbuf_init(prb, TEST_RBUF_SIZE);
+        REQUIRE(0 == rbuf_size(prb));
+        REQUIRE(rbuf_max(prb) == rbuf_spare(prb));
+        REQUIRE(0 == rbuf_forward(prb, 1));
+        REQUIRE(1 == rbuf_write(prb, buffer, 1));
+        REQUIRE(1 == rbuf_size(prb));
+        REQUIRE(1 == rbuf_forward(prb, 1));
+        REQUIRE(0 == rbuf_size(prb));
+        REQUIRE(1 == rbuf_write(prb, buffer, 1));
+        REQUIRE(1 == rbuf_size(prb));
+        REQUIRE(1 == rbuf_forward(prb, 200));
+        REQUIRE(0 == rbuf_size(prb));
     }
 
     SECTION("test ring buffer, test forward") {
@@ -863,6 +894,26 @@ TEST_CASE( .name="macro-ring", .description="test MACRO ring buffer.", .skip=0 )
         CHECK_BOUNDARY(boundary, prb);
         CHECK_BOUNDARY((char *)(prb) + RBUF_OCCUPIED_BYTES(MAX_SIZE+1, sizeof(ITEM_T)), ((char *)boundary + sizeof(boundary)));
     }
+
+    SECTION("test ring buffer, basic forward") {
+        int ret;
+        cur_val = 0;
+        cur_rd = 0;
+        memset(boundary, MASK_BOUNDARY, sizeof(boundary));
+        RBUF_INIT(prb, RBUF_OCCUPIED_BYTES(MAX_SIZE+1, sizeof(ITEM_T)), sizeof(ITEM_T));
+        REQUIRE(0 == RBUF_SIZE(prb));
+        REQUIRE(RBUF_MAX(prb) == RBUF_SPARE(prb));
+        REQUIRE(0 == RBUF_FORWARD(prb, 1));
+        REQUIRE(1 == RBUF_WRITE(prb, buffer, 1));
+        REQUIRE(1 == RBUF_SIZE(prb));
+        REQUIRE(1 == RBUF_FORWARD(prb, 1));
+        REQUIRE(0 == RBUF_SIZE(prb));
+        REQUIRE(1 == RBUF_WRITE(prb, buffer, 1));
+        REQUIRE(1 == RBUF_SIZE(prb));
+        REQUIRE(1 == RBUF_FORWARD(prb, 200));
+        REQUIRE(0 == RBUF_SIZE(prb));
+    }
+
     SECTION("test ring buffer, forward") {
         int ret;
         cur_val = 0;

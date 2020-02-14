@@ -28,9 +28,16 @@
 extern "C" {
 #endif
 
-uint8_t * get_utf8_value (uint8_t *pstart, wchar_t *pval);
+#define utf32_t uint32_t
+
+ssize_t to_utf8(utf32_t val, uint8_t * buf, size_t sz_buf);
+ssize_t to_utf16(utf32_t val, uint16_t * buf, size_t num_item);
+
+uint8_t * get_utf8_value (uint8_t *pstart, utf32_t *pval);
+uint16_t * get_utf16_value (uint16_t *pstart, utf32_t *pval);
 
 #define FOREACH_U8STRING(p, pend, pval) for (; (p < pend) && (p = get_utf8_value(p, pval)); )
+#define FOREACH_U16STRING(p, pend, pval) for (; (p < pend) && (p = get_utf16_value(p, pval)); )
 
 #ifdef __cplusplus
 }

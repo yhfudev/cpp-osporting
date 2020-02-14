@@ -34,7 +34,7 @@ typedef struct _ring_buffer_t {
 
 /**
  * init a ring buffer structure
- * \param prb the ring buffer structure
+ * \param prb the pointer to the start of a memory buffer for ring buffer structure
  * \param byte_size the byte size of the whole buffer
  * \return 0 on success; -1 on error
  */

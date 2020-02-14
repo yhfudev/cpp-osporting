@@ -78,6 +78,9 @@ ciutexec.c:
 	-echo "#include \"../src/ugosarduino.c\"" >> $@
 	-echo "#include \"../src/ugostime.c\"" >> $@
 	-echo "#include \"../src/ugstring.c\"" >> $@
+	-echo "#include \"../src/getline.c\"" >> $@
+	-echo "#include \"../src/getutf8.c\"" >> $@
+	-echo "#include \"../src/ringbuffer.c\"" >> $@
 	-echo "int main(int argc, const char * argv[]) { return ciut_main(argc, argv); }" >> $@
 clean-local-check:
 	-rm -rf ciutexec.c
