@@ -7,18 +7,8 @@
  * @copyright GPL/BSD
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-
+#include "osporting.h"
 #include "getutf8.h"
-
-#if DEBUG
-#define assert(a) if (!(a)) {printf("Assert: " # a); exit(1);}
-#define TRACE(fmt, ...) fprintf (stdout, "[%s()] " fmt " {ln:%d, fn:" __FILE__ "}\n", __func__, ##__VA_ARGS__, __LINE__)
-#else
-#define assert(a)
-#define TRACE(...)
-#endif
 
 /**
  * @brief conver Unicode value to UTF-8
