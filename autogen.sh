@@ -60,6 +60,8 @@ else
   git pull
   cd "${DN_CUR}"
 
+  ./submodule-update.sh
+
   which "$CC" || CC=gcc
   which "$CXX" || if [[ "$CC" =~ .*clang.* ]]; then CXX=clang++; else CXX=g++; fi
   echo "=========== compiling libosporting MY_PREFIX=${MY_PREFIX}"
