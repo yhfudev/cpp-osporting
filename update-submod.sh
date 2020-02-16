@@ -8,3 +8,5 @@ echo "update osporting ..."
 git checkout master
 git pull
 
+git push
+
