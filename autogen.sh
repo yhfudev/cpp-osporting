@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MY_PREFIX=`pwd`/build/usr
+MY_PREFIX=`pwd`/build/
 if [ ! "${PREFIX}" = "" ]; then
 MY_PREFIX="${PREFIX}"
 fi
