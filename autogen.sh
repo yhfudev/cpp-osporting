@@ -50,7 +50,7 @@ if [ 0 = 1 ]; then
   #make -C doc/latex/
 else
   DN_CUR=`pwd`
-  mkdir -p "build"
+  mkdir -p "${MY_PREFIX}"
 
   if [ ! -d cpp-ci-unit-test ]; then
     git clone -q --depth=1 https://github.com/yhfudev/cpp-ci-unit-test.git
