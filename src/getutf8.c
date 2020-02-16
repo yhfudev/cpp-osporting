@@ -81,7 +81,7 @@ to_utf16(utf32_t val, uint16_t * buf, size_t num_item)
     }
     if ((0xD800 <= val) && (val <= 0xDFFF)) {
         /* surrogates */
-        TE("invalid unicode value");
+        TE("invalid unicode value: 0x%X", val);
         return -1;
     }
     if (val >= 0x10000) {
@@ -291,6 +291,7 @@ get_utf16_value (uint16_t *pstart, utf32_t *pval)
 }
 
 
+////////////////////////////////////////////////////////////////////////////////
 #if defined(CIUT_ENABLED) && (CIUT_ENABLED == 1)
 #include <ciut.h>
 

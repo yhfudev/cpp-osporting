@@ -42,4 +42,23 @@ timeval_format(struct timeval *tv, char flg_use_localtime, char *buf, size_t sz)
 }
 #endif
 
+////////////////////////////////////////////////////////////////////////////////
+#if defined(CIUT_ENABLED) && (CIUT_ENABLED == 1)
+#include <ciut.h>
+
+TEST_CASE( .name="gettimeofday", .description="test system gettimeofday.", .skip=0 ) {
+
+    SECTION("test gettimeofday") {
+        struct timeval tv = {0, 0};
+        struct timezone tz = {0, 0};
+        gettimeofday(&tv, &tz);
+        CIUT_LOG("gettimeofday() return tv={%ld.%06d}; tz={%d,%d}.", tv.tv_sec, tv.tv_usec, tz.tz_minuteswest, tz.tz_dsttime);
+        delay(1000);
+        gettimeofday(&tv, &tz);
+        CIUT_LOG("after delay, gettimeofday() return tv={%ld.%06d}; tz={%d,%d}.", tv.tv_sec, tv.tv_usec, tz.tz_minuteswest, tz.tz_dsttime);
+    }
+}
+
+#endif /* CIUT_ENABLED */
+
 
