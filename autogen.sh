@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MY_PREFIX=`pwd`/lib/usr
+MY_PREFIX=`pwd`/build/usr
 if [ ! "${PREFIX}" = "" ]; then
 MY_PREFIX="${PREFIX}"
 fi
@@ -50,6 +50,7 @@ if [ 0 = 1 ]; then
   #make -C doc/latex/
 else
   DN_CUR=`pwd`
+  mkdir -p "build"
 
   if [ ! -d cpp-ci-unit-test ]; then
     git clone -q --depth=1 https://github.com/yhfudev/cpp-ci-unit-test.git
