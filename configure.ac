@@ -214,9 +214,9 @@ AC_CHECK_FUNCS([atexit memset sqrt strerror])
 
 AC_CONFIG_FILES([
         Makefile
-        src/Makefile
         doc/Makefile
         doc/Doxyfile
+        src/Makefile
         examples/Makefile
         examples/testos/Makefile
         tests/Makefile

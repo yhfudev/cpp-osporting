@@ -27,7 +27,7 @@
 
 #define MIN(a,b) (((a)>(b))?(b):(a))
 
-#if defined(ARDUINO)
+#if defined(ARDUINO) && ! defined(ARDUINO_ARCH_ESP8266)
 #define constrain(x,a,b) (((x)<(a))?(a):((x)>(b)?(b):(x)))
 #define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
 #define dtostrf(val, width, prec, buf) sprintf (buf, "%" # width "." # prec "f", (val))

@@ -33,7 +33,7 @@ void debug_set_serial(Stream * out);
 
 #endif
 
-#if ! defined(ARDUINO_ARCH_ESP32)
+#if ! defined(ARDUINO_ARCH_ESP32) && ! defined(ARDUINO_ARCH_ESP8266)
 #define assert(a)
 #endif
 
