@@ -13,9 +13,8 @@
 // common
 #if ! defined(ARDUINO)
 #include <stdint.h> // uint8_t, uint32_t
-#include <stdlib.h>    /* size_t */
+#include <stdlib.h> // abs() size_t
 #include <stdio.h>
-#include <stdlib.h> // abs()
 #include <ctype.h>
 #include <unistd.h> // usleep()
 #include <string.h>
