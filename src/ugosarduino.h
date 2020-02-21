@@ -35,6 +35,7 @@ int digitalRead(uint8_t);
 void analogWrite (uint8_t pin, int val);
 
 unsigned long millis(void);
+unsigned long micros(void);
 
 #define delay(a) usleep((a) * 1000)
 

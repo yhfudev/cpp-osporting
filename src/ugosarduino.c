@@ -34,6 +34,21 @@ millis(void)
     return v;
 }
 
+unsigned long micros(void)
+{
+    struct timeval tv;
+    //struct timezone tz;
+    //gettimeofday(&tv,&tz);
+    gettimeofday(&tv, NULL);
+    if (tv_orig.tv_sec <= 0) {
+        tv_orig = tv;
+        return 0;
+    }
+    unsigned long v = (tv.tv_sec - tv_orig.tv_sec) * 1000000 - (tv_orig.tv_usec) + tv.tv_usec;
+    //TRACE ("millis=%lu", v);
+    return v;
+}
+
 
 #define PIN_LED_PWM 11  // the led for PWM(fade) control
 
