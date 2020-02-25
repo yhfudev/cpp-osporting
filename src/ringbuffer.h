@@ -22,8 +22,8 @@ extern "C" {
 // the sender and receiver, to avoid expose API
 
 typedef struct _ring_buffer_t {
-    size_t pos_read;  // the read position
-    size_t pos_write; // the write position
+    size_t volatile pos_read;  // the read position
+    size_t volatile pos_write; // the write position
     size_t sz_buf;  // byte size of buffer
 
     unsigned char * buf1; // the buffer

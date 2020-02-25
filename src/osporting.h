@@ -27,7 +27,7 @@
 
 #define MIN(a,b) (((a)>(b))?(b):(a))
 
-#if defined(ARDUINO) && ! defined(ARDUINO_ARCH_ESP8266)
+#if defined(ARDUINO) && ! defined(ARDUINO_ARCH_ESP8266) && ! defined(ARDUINO_ARCH_ESP32)
 #define constrain(x,a,b) (((x)<(a))?(a):((x)>(b)?(b):(x)))
 #define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
 #define dtostrf(val, width, prec, buf) sprintf (buf, "%" # width "." # prec "f", (val))
@@ -44,6 +44,8 @@
 
 #if defined(__AVR__)
   #include <avr/pgmspace.h>
+#elif defined(_VARIANT_ARDUINO_STM32_)
+#include <avr/pgmspace.h>                  //use for PROGMEM Arduino STM32
 #elif defined(ARDUINO_ARCH_ESP8266) || defined(ARDUINO_ARCH_ESP32)
   #include <pgmspace.h>
 #else
