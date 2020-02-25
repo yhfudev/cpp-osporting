@@ -90,7 +90,9 @@
 #define __PMT(args)	args
 #endif
 
+#if ! defined(ARDUINO_ARCH_ESP8266) && ! defined(ARDUINO_ARCH_ESP32)
 #define bitRead(a,i) (((a) >> (i)) & 0x01)
+#endif
 
 #if defined(__AVR__)
 #define ugf_int_t int // char

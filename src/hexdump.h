@@ -138,7 +138,7 @@ bulk_hex_dump (void *fd, opaque_t * fragment, size_t size, bhd_cb_writer_t write
                         size_ret += ret;
                 }
                 ch = fragment[i];
-                if (!isprint (ch)) {
+                if (!isprint ((int)ch)) {
                     ch = '.';
                 }
                 ret = sprintf ((char *)buffer, "%c", ch);

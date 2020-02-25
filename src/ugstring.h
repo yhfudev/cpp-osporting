@@ -53,7 +53,7 @@ typedef char (* read_byte_cb_t)(const char * str);
   //#define my_strncmp_leftstatic(p1, p2, max_sz)  my_strncmp_via_callback((p1), (const char *)(p2), (max_sz), read_byte_rom, read_byte_ram)
   #define my_strncmp_rightstatic(p1, p2, max_sz) my_strncmp_via_callback((const char *)(p1), (p2), (max_sz), read_byte_ram, read_byte_rom)
   //#define my_strncmp_rightstatic(p1, p2, max_sz) strncasecmp_P((p1), (p2), (max_sz))
-  //#define my_strncmp_bothstatic(p1, p2, max_sz)  my_strncmp_via_callback((p1),               (p2), (max_sz), read_byte_rom, read_byte_rom)
+  #define my_strncmp_bothstatic(p1, p2, max_sz)  my_strncmp_via_callback((p1),               (p2), (max_sz), read_byte_rom, read_byte_rom)
 
   int my_strlen_P(const char *pstart);
   void * my_memmove_P(void *dest, const void *src, size_t sz);

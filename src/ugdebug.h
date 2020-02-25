@@ -24,7 +24,10 @@
 #include <stdio.h>
 
 #ifdef __cplusplus
-#pragma message _VAL(__cplusplus)
+//#define _STRIZE(a) #a
+//#define _STRMK(a,b) a(b)
+//#pragma message( __FILE__ "(" _STRMK( _STRIZE, __LINE__ ) "): here")
+//#pragma message(_VAL(__cplusplus))
 void debug_set_serial(Stream * out);
 #endif // __cplusplus
 

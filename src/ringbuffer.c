@@ -8,7 +8,9 @@
 #include "ringbuffer.h"
 
 #if defined(ARDUINO)
+#ifndef assert
 #define assert(a)
+#endif
 
 #if 1
 #undef TD
@@ -260,7 +262,7 @@ rbuf_peek(void *prb, size_t offset, uint8_t * buf, size_t sz)
 ssize_t
 rbuf_read(void *prb, uint8_t * buf, size_t sz)
 {
-    ring_buffer_t *p = (ring_buffer_t *)prb;
+    //ring_buffer_t *p = (ring_buffer_t *)prb;
     ssize_t ret;
     ret = rbuf_peek(prb, 0, buf, sz);
     if (ret > 0) {

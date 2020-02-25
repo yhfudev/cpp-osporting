@@ -43,7 +43,6 @@ program_to_ram(const char * cstr_in)
 #undef my_strncmp_bothstatic
 #endif
 #define my_strncmp_leftstatic(p1, p2, max_sz)  my_strncmp_via_callback((p1), (const char *)(p2), (max_sz), read_byte_rom, read_byte_ram)
-#define my_strncmp_rightstatic(p1, p2, max_sz) my_strncmp_via_callback((const char *)(p1), (p2), (max_sz), read_byte_ram, read_byte_rom)
 #define my_strncmp_bothstatic(p1, p2, max_sz)  my_strncmp_via_callback((p1),               (p2), (max_sz), read_byte_rom, read_byte_rom)
 
 // why wrote a strlen_P()/memmove_P() by myself?
@@ -78,7 +77,7 @@ my_memmove_P(void *dest, const void *src, size_t sz)
         // TODO: copy from tail
         p += (sz-1);
         d += (sz-1);
-        while(d >= dest) { c=pgm_read_byte(p); *d = c; p --; d --;}
+        while(d >= (char *)dest) { c=pgm_read_byte(p); *d = c; p --; d --;}
         return dest;
     }
     while (p < ((char *)src + sz)) { c=pgm_read_byte(p); *d = c; p ++; d ++;}

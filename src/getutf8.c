@@ -279,6 +279,7 @@ get_utf16_value (uint16_t *pstart, utf32_t *pval)
             c += (pstart[0] & 0x03FF) << 10;
             c += (pstart[1] & 0x03FF);
             if (pval) *pval = c;
+            assert ((utf32_t)c == get_val_utf16_uni (pstart));
             return pstart + 2;
         } else {
             // error
@@ -286,10 +287,10 @@ get_utf16_value (uint16_t *pstart, utf32_t *pval)
             return NULL; //nullptr;
         }
     }
+    assert ((utf32_t)pstart[0] == get_val_utf16_uni (pstart));
     if (pval) *pval = pstart[0];
     return pstart + 1;
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 #if defined(CIUT_ENABLED) && (CIUT_ENABLED == 1)
