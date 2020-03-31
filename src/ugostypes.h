@@ -8,12 +8,13 @@
 #ifndef UG_OS_TYPES_H
 #define UG_OS_TYPES_H 1
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // type
 #if defined(ARDUINO)
 #include <stddef.h>
-#include <sys/types.h> // off_t
+#include <stdint.h>    // uint8_t
+#include <stdlib.h>    // size_t
+#include <sys/types.h> // ssize_t pid_t off_t
 typedef unsigned char uint8_t;
 #if ! defined(ARDUINO_ARCH_ESP8266) && ! defined(ARDUINO_ARCH_ESP32)
 typedef long int ssize_t;

@@ -39,6 +39,8 @@ program_to_ram(const char * cstr_in)
 #undef my_memmove_P
 #undef read_byte_ram
 #undef read_byte_rom
+#endif
+#ifdef my_strncmp_leftstatic
 #undef my_strncmp_leftstatic
 #undef my_strncmp_bothstatic
 #endif

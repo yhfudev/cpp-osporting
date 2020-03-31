@@ -16,7 +16,7 @@
 #if ! defined(ARDUINO)
 #include <stdio.h>
 #include <ctype.h>
-#include <unistd.h> // usleep()
+#include <unistd.h> // STDERR_FILENO usleep()
 #include <string.h>
 #include <limits.h>
 #include <sys/types.h> /* ssize_t pid_t off64_t */
@@ -103,7 +103,7 @@
 #ifdef __WIN32__                /* or whatever */
 #define PRIiSZ "Id"
 #define PRIuSZ "Iu"
-#elseif defined(ARDUINO)
+#elif defined(ARDUINO)
 #define PRIiSZ "d"
 #define PRIuSZ "d"
 #define PRIxSZ "X"

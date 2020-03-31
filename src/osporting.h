@@ -12,12 +12,11 @@
 #include "ugosarduino.h"
 #include "ugostypes.h"
 #include "ugostime.h"
+#include "ugstring.h"
 #include "ugdebug.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Macro
-#define UNUSED_VARIABLE(a) ((void)(a))
-
 #ifndef NUM_ARRAY
   #define NUM_ARRAY(a) (sizeof(a)/sizeof((a)[0]))
 #endif // NUM_ARRAY
@@ -27,7 +26,7 @@
 #define MIN(a,b) (((a)>(b))?(b):(a))
 
 #if defined(ARDUINO) && ! defined(ARDUINO_ARCH_ESP8266) && ! defined(ARDUINO_ARCH_ESP32)
-#define constrain(x,a,b) (((x)<(a))?(a):((x)>(b)?(b):(x)))
+//#define constrain(x,a,b) (((x)<(a))?(a):((x)>(b)?(b):(x)))
 #define round(x)     ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
 #define dtostrf(val, width, prec, buf) sprintf (buf, "%" # width "." # prec "f", (val))
 #endif
@@ -79,7 +78,7 @@
 #define __PMT(args)	args
 #endif
 
-#if ! defined(ARDUINO_ARCH_ESP8266) && ! defined(ARDUINO_ARCH_ESP32)
+#if ! defined(ARDUINO)
 #define bitRead(a,i) (((a) >> (i)) & 0x01)
 #endif
 

@@ -14,13 +14,27 @@
 // string and memory
 
 #ifndef __ATTR_PROGMEM__
+  #ifndef strlen_P
   #define strlen_P strlen
+  #endif
+  #ifndef strcpy_P
   #define strcpy_P strcpy
+  #endif
+  #ifndef strncmp_P
   #define strncmp_P strncmp
+  #endif
+  #ifndef memcpy_P
   #define memcpy_P memcpy
+  #endif
+  #ifndef vsnprintf_P
   #define vsnprintf_P vsnprintf
+  #endif
+  #ifndef sprintf_P
   #define sprintf_P sprintf
+  #endif
+  #ifndef snprintf_P
   #define snprintf_P snprintf
+  #endif
 #endif // __ATTR_PROGMEM__
 
 #ifdef __cplusplus
