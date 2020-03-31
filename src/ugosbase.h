@@ -11,9 +11,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // common
-#if ! defined(ARDUINO)
 #include <stdint.h> // uint8_t, uint32_t
 #include <stdlib.h> // abs() size_t
+#if ! defined(ARDUINO)
 #include <stdio.h>
 #include <ctype.h>
 #include <unistd.h> // usleep()
@@ -23,8 +23,29 @@
 #include <sys/time.h>
 #include <time.h>
 #include <assert.h>
-
 #endif // ! ARDUINO
+
+#ifdef _WIN32
+#include <winsock2.h>
+#include <windows.h>
+#include <ws2tcpip.h>
+
+#ifndef fsync
+#define fsync(fd) _commit(fd)
+#endif
+#ifndef u_int8_t
+#define u_int8_t uint8_t
+#define u_int16_t uint16_t
+#define u_int32_t uint32_t
+#define u_int64_t uint64_t
+#endif
+
+#elif ! defined(ARDUINO)
+#include <unistd.h> // STDERR_FILENO
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h> // inet_ntoa()
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 // Arduino related

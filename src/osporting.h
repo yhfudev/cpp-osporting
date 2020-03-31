@@ -14,7 +14,6 @@
 #include "ugostime.h"
 #include "ugdebug.h"
 
-
 ////////////////////////////////////////////////////////////////////////////////
 // Macro
 #define UNUSED_VARIABLE(a) ((void)(a))
@@ -69,16 +68,6 @@
 #ifndef PROGMEM
   #define PROGMEM
 #endif // PROGMEM
-
-#ifndef __ATTR_PROGMEM__
-  #define strlen_P strlen
-  #define strcpy_P strcpy
-  #define strncmp_P strncmp
-  #define memcpy_P memcpy
-  #define vsnprintf_P vsnprintf
-  #define sprintf_P sprintf
-  #define snprintf_P snprintf
-#endif // __ATTR_PROGMEM__
 
 #ifndef _BV
 #define _BV(bit) (1 << (bit))
