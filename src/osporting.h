@@ -23,7 +23,7 @@
 
 #define UNUSED_VARIABLE(a) ((void)(a))
 
-#define MIN(a,b) (((a)>(b))?(b):(a))
+#define UG_MIN(a,b) (((a)>(b))?(b):(a))
 
 #if defined(ARDUINO) && ! defined(ARDUINO_ARCH_ESP8266) && ! defined(ARDUINO_ARCH_ESP32)
 //#define constrain(x,a,b) (((x)<(a))?(a):((x)>(b)?(b):(x)))
