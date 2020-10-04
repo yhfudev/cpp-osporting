@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdint.h>    // uint8_t
 #include <stdlib.h>    // size_t
+#include <limits.h>    // INT_MIN
 #include <sys/types.h> // ssize_t pid_t off_t
 typedef unsigned char uint8_t;
 #if ! defined(ARDUINO_ARCH_ESP8266) && ! defined(ARDUINO_ARCH_ESP32)
